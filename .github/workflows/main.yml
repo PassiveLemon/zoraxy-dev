@@ -35,7 +35,7 @@ jobs:
           context: ./docker
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: zoraxydocker/zoraxy:latest,zoraxydocker/zoraxy:${{ github.event.release.tag_name }}
+          tags: zoraxydocker/zoraxy:TESTDONTUSE
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
