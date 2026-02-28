@@ -1,6 +1,3 @@
 src/
 test/
 
-container-builder.sh
-docker-compose.yaml
-
