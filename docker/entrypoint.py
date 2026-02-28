@@ -121,6 +121,9 @@ def main():
 
   if getenv("ZEROTIER", "false") == "true":
     start_zerotier()
+  else:
+    # Zerotier requires reading the auth token from a file and removing busybox will break that
+    os.remove("/bin/busybox")
 
   start_zoraxy()
 
