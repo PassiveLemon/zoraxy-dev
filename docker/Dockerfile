@@ -14,20 +14,17 @@ RUN go mod tidy &&\
 
 
 ## Build ZeroTier
-FROM docker.io/rust:1.79-alpine AS build-zerotier
-RUN apk add --update --no-cache curl make gcc g++ linux-headers openssl-dev nano
+FROM docker.io/rust:1.97-alpine AS build-zerotier
+RUN apk add --update --no-cache curl make gcc g++ linux-headers openssl-dev
 
 RUN mkdir -p /opt/zerotier/source/ &&\
     mkdir -p /usr/local/bin/
 
 WORKDIR /opt/zerotier/source/
 
-# Version is pinned because newer versions don't work for whatever reason
-RUN curl -Lo ZeroTierOne.tar.gz https://codeload.github.com/zerotier/ZeroTierOne/tar.gz/refs/tags/1.10.6 &&\
+RUN curl -Lo ZeroTierOne.tar.gz https://codeload.github.com/zerotier/ZeroTierOne/tar.gz/refs/tags/1.16.2 &&\
     tar -xzvf ZeroTierOne.tar.gz &&\
-    cd ZeroTierOne-*/zeroidc &&\
-    cargo update -p getrandom &&\
-    cd .. &&\
+    cd ZeroTierOne-*/ &&\
     make -f make-linux.mk &&\
     mv ./zerotier-one /usr/local/bin/zerotier-one &&\
     chmod 755 /usr/local/bin/zerotier-one
